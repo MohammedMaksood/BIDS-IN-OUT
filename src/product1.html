@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Bid</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #1E1E1E;
+        }
+
+        .header {
+            background-color: #2D2D2D;
+            padding: 20px;
+            height: 120px;
+        }
+
+        .top-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .brand-name {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .back-btn {
+            background-color: #D9D9D9;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .fa-arrow-left {
+            color: #333;
+            font-size: 18px;
+        }
+
+        .product-section {
+            margin-top: 20px;
+            padding: 0 20px;
+            position: relative;
+            height: 160px;
+        }
+
+        .product-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .product-image {
+            background-color: white;
+            padding: 15px;
+            border-radius: 25px;
+            text-align: center;
+            width: 160px;
+            height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .shoe-image {
+            width: 100px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .product-name {
+            color: black;
+            font-weight: bold;
+            margin-top: 10px;
+            font-size: 20px;
+        }
+
+        .timer-container {
+            position: absolute;
+            right: 40px;
+            top: 0;
+        }
+
+        .timer-circle {
+            background-color: #D9D9D9;
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .timer-text {
+            color: black;
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .countdown {
+            color: black;
+            font-weight: bold;
+            font-size: 22px;
+        }
+
+        .product-details {
+            padding: 20px;
+            margin-top: 20px;
+            margin-left: 40px;
+        }
+
+        .content-wrapper {
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .details-box {
+            background-color: #2D2D2D;
+            border-radius: 25px;
+            padding: 40px;
+            max-width: 450px;
+            flex-shrink: 0;
+        }
+
+        .details-container {
+            color: white;
+        }
+
+        .detail-item {
+            margin-bottom: 25px;
+            font-size: 20px;
+        }
+
+        .description-continued {
+            margin-top: -20px;
+            margin-left: 110px;
+        }
+
+        .bid-label {
+            color: white;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .bid-input-container {
+            margin-bottom: 25px;
+        }
+
+        .bid-input {
+            width: 100%;
+            padding: 18px;
+            border-radius: 12px;
+            border: none;
+            background-color: #D9D9D9;
+            font-size: 20px;
+        }
+
+        .bid-button {
+            background-color: #E67E22;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 18px 45px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+        }
+
+        .bid-button:hover {
+            background-color: #D35400;
+        }
+
+        .leave-bid-button {
+            background-color: #E67E22;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 18px 45px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .leave-bid-button:hover {
+            background-color: #D35400;
+        }
+
+        .bids-box {
+            background-color: #2D2D2D;
+            border-radius: 25px;
+            padding: 30px;
+            width: 450px;
+            height: 500px;
+            flex-shrink: 0;
+        }
+
+        .bids-header {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #404040;
+        }
+
+        .header-item {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .bids-content {
+            min-height: 400px;
+            overflow-y: auto;
+        }
+
+        .bid-entry {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #404040;
+            color: white;
+            font-size: 18px;
+        }
+
+        .bid-entry:first-child {
+            background-color: #383838;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .bid-name {
+            font-weight: bold;
+        }
+
+        .bid-amount {
+            color: #E67E22;
+        }
+
+        .bid-entry:hover {
+            background-color: #383838;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 0 -15px;
+            transition: all 0.3s ease;
+        }
+
+        .seller-controls {
+            background-color: #2D2D2D;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            color: white;
+        }
+
+        .time-inputs {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .time-inputs input {
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+            width: 100px;
+        }
+
+        .time-inputs button {
+            background-color: #E67E22;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .time-inputs button:hover {
+            background-color: #de5d06;
+        }
+
+        .bid-status {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .bid-item {
+            background-color: #333;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+
+        .bid-item p {
+            margin: 0;
+            color: #fff;
+        }
+
+        .bid-item small {
+            color: #aaa;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header" data-aos="fade-down">
+        <div class="top-section">
+            <h1 class="brand-name">BIDS IN & OUT</h1>
+            <button class="back-btn" onclick="window.location.href='buyer-page.html'">
+                <i class="fas fa-arrow-left"></i>
+                Back
+            </button>
+        </div>
+    </div>
+
+    <!-- Updated product section -->
+    <div class="product-section" data-aos="fade-up">
+        <div class="product-container">
+            <div class="product-image" data-aos="fade-right" data-aos-delay="100">
+                <img src="/images/shoe.jpg" alt="NIKE" class="shoe-image">
+                <p class="product-name">NIKE</p>
+            </div>
+        </div>
+        <div class="timer-container">
+            <div class="timer-circle">
+                <p class="timer-text">Product End In:</p>
+                <div id="countdown" class="countdown">
+                    <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Updated product details section -->
+    <div class="product-details" data-aos="fade-left" data-aos-delay="200">
+        <div class="content-wrapper">
+            <div class="content-container">
+                <div class="details-box">
+                    <div class="details-container">
+                        <p class="detail-item">Product Title: Nike AirMax</p>
+                        <p class="detail-item">Starting Price($): $49</p>
+                        <p class="detail-item">Description: 1 month old With Box and</p>
+                        <p class="detail-item description-continued">Original laces are available</p>
+                        
+                        <p class="bid-label">Place your bid $</p>
+                        <div class="bid-input-container">
+                            <input type="number" class="bid-input" placeholder="">
+                        </div>
+                        <button class="bid-button" onclick="handleBidSubmission()">Bid</button>
+                        <button class="leave-bid-button" onclick="handleLeaveBid()">Leave Bid</button>
+    
+                    </div>
+                </div>
+
+                <!-- New bids box -->
+                <div class="bids-box" data-aos="fade-up" data-aos-delay="300">
+                    <div class="bids-header">
+                        <span class="header-item">Name</span>
+                        <span class="header-item">Bid Amount</span>
+                    </div>
+                    <div class="bids-content" id="bidsContent">
+                        <!-- Bids will be displayed here dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add this seller control panel -->
+    <div id="sellerControls" class="seller-controls" style="display: none;">
+        <h3>Set Product End Time</h3>
+        <div class="time-inputs">
+            <input type="number" id="setHours" placeholder="Hours" min="0" max="99">
+            <input type="number" id="setMinutes" placeholder="Minutes" min="0" max="59">
+            <button onclick="updateTimer()">Update Timer</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            offset: 100,
+            duration: 1000,
+            easing: 'ease',
+        });
+        
+        // Function to get current user's name from localStorage
+        function getCurrentUserName() {
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            return user ? user.username : 'Guest';
+        }
+    
+        // Function to check if user is logged in
+        function isUserLoggedIn() {
+            const user = localStorage.getItem('currentUser');
+            const token = localStorage.getItem('token');
+            return user !== null && token !== null;
+        }
+    
+        async function saveBid(userName, amount) {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    alert('Please log in to place a bid');
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                const response = await fetch('http://localhost:5000/api/bids', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        productId: '1',
+                        amount: parseFloat(amount)
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    if (response.status === 401) {
+                        // Token expired or invalid
+                        localStorage.removeItem('token');
+                        localStorage.removeItem('currentUser');
+                        alert('Your session has expired. Please log in again.');
+                        window.location.href = 'login.html';
+                        return;
+                    }
+                    throw new Error(errorData.message || 'Error placing bid');
+                }
+
+                const data = await response.json();
+                if (data.success) {
+                    alert('Bid placed successfully!');
+                    loadExistingBids();
+                } else {
+                    alert('Error placing bid: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Error saving bid:', error);
+                alert('Error saving bid: ' + error.message);
+            }
+        }
+
+        async function loadExistingBids() {
+            try {
+                const response = await fetch('http://localhost:5000/api/products/1/bids');
+                if (!response.ok) {
+                    throw new Error('Error fetching bids');
+                }
+
+                const data = await response.json();
+                if (data.success) {
+                    const bidsContent = document.getElementById('bidsContent');
+                    bidsContent.innerHTML = ''; // Clear existing bids
+
+                    data.bids.forEach(bid => {
+                        const bidElement = document.createElement('div');
+                        bidElement.className = 'bid-item';
+                        
+                        const date = new Date(bid.createdAt);
+                        const formattedDate = date.toLocaleString();
+                        
+                        bidElement.innerHTML = `
+                            <p><strong>${bid.bidder.username}</strong> bid $${bid.amount}</p>
+                            <small>${formattedDate}</small>
+                        `;
+                        bidsContent.appendChild(bidElement);
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading bids:', error);
+            }
+        }
+
+        // Load existing bids when page loads
+        document.addEventListener('DOMContentLoaded', loadExistingBids);
+    
+        const countDownDate = new Date().getTime() + (24 * 60 * 60 * 1000);
+    
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const timeRemaining = countDownDate - now;
+            
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+            
+            const displayHours = hours < 10 ? "0" + hours : hours;
+            const displayMinutes = minutes < 10 ? "0" + minutes : minutes;
+            const displaySeconds = seconds < 10 ? "0" + seconds : seconds;
+            
+            document.getElementById("hours").textContent = displayHours;
+            document.getElementById("minutes").textContent = displayMinutes;
+            document.getElementById("seconds").textContent = displaySeconds;
+            
+            if (timeRemaining < 0) {
+                clearInterval(timer);
+                document.getElementById("countdown").innerHTML = "EXPIRED";
+            }
+        }, 1000);
+    
+        // Function to handle bid submission
+        function handleBidSubmission() {
+            const bidInput = document.querySelector('.bid-input');
+            const bidAmount = bidInput.value;
+    
+            if (!isUserLoggedIn()) {
+                alert('Please log in to place a bid');
+                window.location.href = 'login.html';
+                return;
+            }
+    
+            if (bidAmount) {
+                saveBid(getCurrentUserName(), bidAmount);
+                bidInput.value = ''; // Clear the input after submission
+            } else {
+                alert('Please enter a bid amount');
+            }
+        }
+    
+        // Function to handle leave bid
+        function handleLeaveBid() {
+            const userName = getCurrentUserName();
+            if (!userName) {
+                alert('Please log in to leave a bid');
+                return;
+            }
+
+            const currentBidAmount = document.querySelector('.bid-input').value;
+            const bidsContent = document.querySelector('.bids-content');
+            const currentTime = new Date().toLocaleTimeString();
+
+            const bidElement = document.createElement('div');
+            bidElement.className = 'bid-item';
+            bidElement.innerHTML = `
+                <div class="bid-info">
+                    <span class="bidder-name">${userName}</span>
+                    <span class="bid-amount">₹${currentBidAmount}</span>
+                    <span class="bid-time">${currentTime}</span>
+                    <span class="bid-status" style="color: #E74C3C; font-size: 18px; font-weight: bold;">Left the bid</span>
+                </div>
+            `;
+
+            bidsContent.insertBefore(bidElement, bidsContent.firstChild);
+            
+            // Clear the bid input
+            document.querySelector('.bid-input').value = '';
+            
+            // Save the leave bid action
+            saveLeaveBid(userName, currentBidAmount);
+        }
+
+        function saveLeaveBid(userName, amount) {
+            let bids = JSON.parse(localStorage.getItem('bids')) || [];
+            bids.unshift({
+                userName: userName,
+                amount: amount,
+                time: new Date().toLocaleTimeString(),
+                status: 'left'
+            });
+            localStorage.setItem('bids', JSON.stringify(bids));
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</body>
+</html>

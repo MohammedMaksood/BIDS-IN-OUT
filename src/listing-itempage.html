@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List Item - BIDS IN & OUT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #1E1E1E;
+        }
+
+        .header {
+            background-color: #2D2D2D;
+            padding: 20px;
+            position: relative;
+            height: 180px;
+        }
+
+        .brand-name {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .back-btn {
+            background-color: #404040;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: absolute;
+            top: 70px;
+            left: 20px;
+        }
+
+        .back-btn:hover {
+            background-color: #505050;
+        }
+
+        .verification-text {
+            color: white;
+            font-size: 16px;
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            text-align: left;
+        }
+
+        .listing-text {
+            color: white;
+            font-size: 18px;
+            position: absolute;
+            top: 85px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        /* Font Awesome arrow icon styles */
+        .fa-arrow-left {
+            font-size: 20px;
+        }
+
+        .form-section {
+            padding: 30px;
+            background-color: #2D2D2D;
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .form-group-container {
+            width: 45%;
+        }
+
+        label {
+            display: block;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: none;
+            background-color: #D9D9D9;
+            font-size: 16px;
+        }
+
+        .form-input:focus {
+            outline: none;
+            background-color: #E5E5E5;
+        }
+
+        .description-input {
+            height: 150px;
+            resize: none;
+        }
+
+        .upload-area {
+            width: 100%;
+            height: 150px;
+            background-color: #D9D9D9;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .upload-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .upload-area:hover {
+            background-color: #E5E5E5;
+        }
+
+        #uploadText {
+            font-weight: bold;
+        }
+
+        .form-group-full {
+            width: 100%;
+        }
+
+        /* Update datetime input styling to match design */
+        input[type="datetime-local"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            background-color: #D9D9D9;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        input[type="datetime-local"]:focus {
+            outline: none;
+            background-color: #E5E5E5;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .post-button {
+            background-color: #E67E22;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .post-button:hover {
+            background-color: #D35400;
+        }
+    </style>
+</head>
+<body>
+    <div class="header" data-aos="fade-down">
+        <h1 class="brand-name">BIDS IN & OUT</h1>
+        <button class="back-btn" onclick="window.location.href='index.html'">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <p class="listing-text">List Your Item For Auction.</p>
+        <p class="verification-text">Ensure your identity is verified to start selling on our platform.</p>
+    </div>
+
+    <div class="form-section" data-aos="fade-up">
+        <div class="form-row" data-aos="fade-right" data-aos-delay="100">
+            <div class="form-group-container">
+                <label>Product Title</label>
+                <input type="text" class="form-input" placeholder="">
+            </div>
+            <div class="form-group-container">
+                <label>Starting Price($)</label>
+                <input type="number" class="form-input" placeholder="">
+            </div>
+        </div>
+
+        <div class="form-row" style="margin-top: 40px;" data-aos="fade-right" data-aos-delay="200">
+            <div class="form-group-container">
+                <label>Description</label>
+                <textarea class="form-input description-input" placeholder=""></textarea>
+            </div>
+            <div class="form-group-container">
+                <label>Product Image</label>
+                <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                    <input type="file" 
+                           id="fileInput" 
+                           accept="image/*" 
+                           style="display: none;"
+                           onchange="handleFileSelect(event)">
+                    <div class="upload-content">
+                        <p id="uploadText">Upload Image</p>
+                        <img id="previewImage" style="display: none; max-width: 100%; max-height: 100%; border-radius: 8px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row" style="margin-top: 40px;" data-aos="fade-right" data-aos-delay="300">
+            <div class="form-group-full">
+                <label>End Date & Time For Your Product In Auction</label>
+                <input type="datetime-local" class="form-input" placeholder="">
+            </div>
+        </div>
+
+        <div class="button-container" style="margin-top: 40px;" data-aos="zoom-in" data-aos-delay="400">
+            <button class="post-button">Post Product</button>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            offset: 100,
+            duration: 1000,
+            easing: 'ease',
+        });
+        
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewImage = document.getElementById('previewImage');
+                    const uploadText = document.getElementById('uploadText');
+                    
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = 'block';
+                    uploadText.style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        document.querySelector('.post-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Get all the input values
+            const productName = document.querySelector('input[placeholder="Product Title"]').value;
+            const productPrice = document.querySelector('input[placeholder="Starting Price($)"]').value;
+            const productDescription = document.querySelector('textarea[placeholder="Description"]').value;
+            const productImage = document.querySelector('input[type="file"]').files[0];
+
+            if (!productName || !productPrice || !productDescription || !productImage) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Handle image upload
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                // Create new product object
+                const newProduct = {
+                    id: 'product' + Date.now(), // Unique ID
+                    name: productName,
+                    price: '$' + productPrice,
+                    description: productDescription,
+                    image: event.target.result, // Base64 image string
+                    timestamp: new Date().toISOString()
+                };
+
+                // Save to localStorage
+                saveNewProduct(newProduct);
+
+                // Show success message and redirect
+                alert('Product listed successfully!');
+                window.location.href = 'buyer-page.html';
+            };
+
+            reader.readAsDataURL(productImage);
+        });
+
+        function saveNewProduct(product) {
+            // Get existing products or initialize empty array
+            let listedProducts = JSON.parse(localStorage.getItem('listedProducts') || '[]');
+            
+            // Add new product at the beginning of the array
+            listedProducts.unshift(product);
+            
+            // Save back to localStorage
+            localStorage.setItem('listedProducts', JSON.stringify(listedProducts));
+        }
+    </script>
+</body>
+</html>
