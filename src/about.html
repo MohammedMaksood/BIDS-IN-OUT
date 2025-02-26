@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - BIDS IN & OUT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #1E1E1E;
+            color: #fff;
+        }
+
+        .navbar {
+            background-color: #2D2D2D;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            color: #E67E22;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #E67E22;
+        }
+
+        .about-header {
+            margin-top: 100px;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .about-title {
+            color: #E67E22;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .about-subtitle {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+
+        .about-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .about-section {
+            background-color: #2D2D2D;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .about-section h2 {
+            color: #E67E22;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .about-section p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background-color: #363636;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .feature-card i {
+            color: #E67E22;
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            color: #E67E22;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .team-section {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .contact-section {
+            text-align: center;
+            padding: 40px;
+            background-color: #2D2D2D;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+
+        .contact-button {
+            display: inline-block;
+            background-color: #E67E22;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 18px;
+            margin-top: 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-button:hover {
+            background-color: #d35400;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
+        }
+
+        .contact-info {
+            margin: 20px 0;
+            font-size: 18px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">BIDS IN & OUT</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="buyer-page.html">Buyer</a>
+                <a href="listing-itempage.html">Seller</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="about-header" data-aos="fade-up">
+        <h1 class="about-title">About BIDS IN & OUT</h1>
+        <p class="about-subtitle">Your Premier Online Auction Platform</p>
+    </header>
+
+    <main class="about-content">
+        <section class="about-section" data-aos="fade-up">
+            <h2>Our Story</h2>
+            <p>Welcome to Bids In & Out, your trusted destination for online auctions. Founded with a vision to create a transparent and accessible marketplace, we've grown into a vibrant community where buyers and sellers come together to exchange unique items at fair prices.</p>
+            <p>Our platform is built on the principles of trust, transparency, and user satisfaction. We strive to provide a seamless experience for both buyers and sellers, ensuring every transaction is secure and every auction is fair.</p>
+        </section>
+
+        <section class="about-section" data-aos="fade-up">
+            <h2>What Sets Us Apart</h2>
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Secure Bidding</h3>
+                    <p>Advanced security measures to protect your transactions and personal information</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h3>Fair Pricing</h3>
+                    <p>Transparent bidding process ensuring fair market values for all items</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-users"></i>
+                    <h3>Community</h3>
+                    <p>A growing community of trusted buyers and sellers</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fas fa-headset"></i>
+                    <h3>24/7 Support</h3>
+                    <p>Round-the-clock customer support to assist you with any queries</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section" data-aos="fade-up">
+            <h2>Our Mission</h2>
+            <p>At Bids In & Out, our mission is to revolutionize the online auction experience by creating a platform that is accessible, secure, and user-friendly. We believe in:</p>
+            <ul style="list-style: none; padding-left: 20px;">
+                <li style="margin: 10px 0;">• Providing a transparent and fair marketplace</li>
+                <li style="margin: 10px 0;">• Ensuring secure transactions for all users</li>
+                <li style="margin: 10px 0;">• Building a community based on trust and reliability</li>
+                <li style="margin: 10px 0;">• Offering competitive prices for buyers and sellers</li>
+            </ul>
+        </section>
+
+        <section class="contact-section" data-aos="fade-up">
+            <h2>Get In Touch</h2>
+            <p class="contact-info">Have questions or facing any issues? Feel free to reach out!</p>
+            <a href="mailto:maksood.alam1902@gmail.com" class="contact-button">
+                <i class="fas fa-envelope"></i> Contact Us
+            </a>
+        </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            offset: 100,
+            duration: 1000,
+            easing: 'ease',
+        });
+    </script>
+</body>
+</html>

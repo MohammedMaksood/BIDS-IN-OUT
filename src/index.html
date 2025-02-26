@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - BIDS IN & OUT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #1E1E1E;
+        }
+
+        .navbar {
+            background-color: #2D2D2D;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .nav-container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+        }
+
+        .logo {
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            justify-content: center;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        /* Modified navigation link styles */
+        .nav-links a {
+            background: linear-gradient(45deg, #FF8C00, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradient 3s linear infinite;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Hover effect only for nav links (not login button) */
+        .nav-links a:hover {
+            background: linear-gradient(45deg, #FFA500, #FF4500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transform: scale(1.1);
+        }
+
+        /* Remove the active state color */
+        .nav-links a.active {
+            color: #ffffff;
+        }
+
+        .login-section {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .login-btn {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 8px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .login-btn:hover {
+            background: white;
+            color: #2D2D2D;
+        }
+
+        /* Add new styles for search section */
+        .search-section {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .search-title {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 25px;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            background-color: #2D2D2D;
+            color: white;
+            font-size: 16px;
+        }
+
+        .search-results {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #2D2D2D;
+            border-radius: 15px;
+            margin-top: 5px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            cursor: pointer;
+            color: white;
+            border-bottom: 1px solid #404040;
+        }
+
+        .search-result-item:hover {
+            background-color: #383838;
+        }
+
+        .search-result-item img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            margin-right: 15px;
+            border-radius: 8px;
+        }
+
+        .search-result-item .product-info {
+            flex-grow: 1;
+        }
+
+        .search-result-item .product-name {
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .search-result-item .product-price {
+            color: #E67E22;
+            font-size: 14px;
+        }
+
+        /* Style for when search input is focused */
+        .search-input:focus {
+            border-color: #4261c0;
+        }
+
+        /* New styles for buying/selling cards */
+        .cards-section {
+            display: flex;
+            justify-content: center;
+            gap: 262px;
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            width: 380px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .image-container {
+            width: 100%;
+            height: 160px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card.buying .image-container {
+            border-radius: 10px;
+        }
+
+        .card.selling .image-container {
+            border-radius: 10px;
+        }
+
+        .image-container img {
+            width: 80%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-text {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+            padding: 0 10px;
+        }
+
+        /* New styles for How It Works section */
+        .how-it-works {
+            padding: 80px 20px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 50px;
+        }
+
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            color: white;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .step-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .step-description {
+            font-size: 14px;
+            color: #888;
+            line-height: 1.5;
+            max-width: 250px;
+            margin: 0 auto;
+        }
+
+        /* New styles for Products section */
+        .products-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .products-title {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .image-wrapper {
+            width: 100%;
+            height: 180px; /* Fixed height for consistent image container */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* This ensures image maintains aspect ratio */
+            max-width: 180px; /* Maximum width of the image */
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #333;
+            margin: 0;
+            padding: 10px 0;
+        }
+
+        .view-btn {
+            background: #000;
+            color: white;
+            padding: 10px 0;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background 0.3s ease;
+            width: 100%;
+            display: block;
+        }
+
+        .view-btn:hover {
+            background: #333;
+        }
+
+        /* New Footer Styles */
+        footer {
+            background-color: #2D2D2D;
+            padding: 50px 20px;
+            margin-top: 80px;
+            border-top: 1px solid #3D3D3D;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        .footer-logo {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .footer-title {
+            color: white;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            color: #888;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* Add these styles */
+        .user-section {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .user-name {
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .logout-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #2D2D2D;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .logout-btn {
+            padding: 10px 20px;
+            width: 100%;
+            border: none;
+            background: none;
+            color: white;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .logout-btn:hover {
+            background-color: #E67E22;
+        }
+
+        .user-name:hover + .logout-menu,
+        .logout-menu:hover {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" data-aos="fade-down">
+        <div class="nav-container">
+            <a href="#" class="logo">BIDS IN & OUT</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="buyer-page.html">Buyer</a>
+                <a href="listing-itempage.html">Seller</a>
+            </div>
+            <div class="user-section">
+                <div id="loginBtn" class="login-btn" style="display: none;">
+                    Login
+                </div>
+                <div id="userMenu" class="user-menu" style="display: none;">
+                    <div id="userName" class="user-name"></div>
+                    <div id="logoutMenu" class="logout-menu">
+                        <button id="logoutBtn" class="logout-btn">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="search-section" data-aos="fade-up">
+        <h1 class="search-title">Find the perfect product to bid on!</h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search products...">
+            <div id="searchResults" class="search-results"></div>
+        </div>
+    </div>
+
+    <div class="cards-section" data-aos="fade-up">
+        <div class="card buying">
+            
+            <div class="image-container">
+                <img src="/images/headphone.jpg" alt="Buying">
+            </div>
+            <h3 class="card-title">BUYING</h3>
+            <p class="card-text">Buying products can be a great way to reach for those items at potentially lower prices</p>
+        </div>
+        
+        <div class="card selling">
+            <div class="image-container">
+                
+                <img src="/images/blog.jpg" alt="Selling">
+            </div>
+            <h3 class="card-title">SELLING</h3>
+            <p class="card-text">Selling products can be a great way to reach potential buyers and potentially achieve a good price</p>
+        </div>
+    </div>
+
+    <div class="how-it-works" data-aos="fade-up">
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps-container">
+            <div class="step" data-aos="fade-right" data-aos-delay="100">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Register</h3>
+                <p class="step-description">Create an account as a buyer or seller</p>
+            </div>
+
+            <div class="step" data-aos="fade-right" data-aos-delay="200">
+                <div class="step-number">2</div>
+                <h3 class="step-title">List or Bid</h3>
+                <p class="step-description">Post items for sale or place bids on items</p>
+            </div>
+
+            <div class="step" data-aos="fade-right" data-aos-delay="300">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Transaction</h3>
+                <p class="step-description">Finalize the sale when auction ends</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="products-section" data-aos="fade-up">
+        <h2 class="products-title">PRODUCTS THAT ARE LIVE</h2>
+        <div class="products-grid">
+            <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="image-wrapper">
+                    <img src="/images/shoe.jpg" alt="Nike" class="product-image">
+                </div>
+                <h3 class="product-name">NIKE</h3>
+                <a href="buyer-page.html" class="view-btn">View</a>
+            </div>
+
+            <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="image-wrapper">
+                    <img src="/images/perfume.jpg" alt="Perfume" class="product-image">
+                </div>
+                <h3 class="product-name">PERFUME</h3>
+                <a href="buyer-page.html" class="view-btn">View</a>
+            </div>
+
+            <div class="product-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="image-wrapper">
+                    <img src="/images/ps.jpg" alt="PlayStation" class="product-image">
+                </div>
+                <h3 class="product-name">PLAYS STATION</h3>
+                <a href="  buyer-page.html" class="view-btn">View</a>
+            </div>
+
+            <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="image-wrapper">
+                    <img src="/images/camera.jpg" alt="Camera" class="product-image">
+                </div>
+                <h3 class="product-name">CAMERA</h3>
+                <a href="buyer-page.html" class="view-btn">View</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            offset: 100,
+            duration: 1000,
+            easing: 'ease',
+        });
+        
+        // Product database with just the four default products
+        const products = [
+            {
+                id: 'product1',
+                name: 'Nike Shoe',
+                price: '$49',
+                image: '/images/nike-shoe.jpg',
+                url: 'product1.html'
+            },
+            {
+                id: 'product2',
+                name: 'Perfume',
+                price: '$29',
+                image: '/images/perfume.jpg',
+                url: 'product2.html'
+            },
+            {
+                id: 'product3',
+                name: 'Camera',
+                price: '$299',
+                image: '/images/camera.jpg',
+                url: 'product3.html'
+            },
+            {
+                id: 'product4',
+                name: 'PlayStation',
+                price: '$499',
+                image: '/images/playstation.jpg',
+                url: 'product4.html'
+            }
+        ];
+
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+
+        // Search functionality
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            if (searchTerm.length < 1) {
+                searchResults.style.display = 'none';
+                return;
+            }
+
+            // Filter products based on search term
+            const matchingProducts = products.filter(product => 
+                product.name.toLowerCase().includes(searchTerm)
+            );
+
+            // Display results
+            if (matchingProducts.length > 0) {
+                searchResults.style.display = 'block';
+                searchResults.innerHTML = matchingProducts.map(product => `
+                    <div class="search-result-item" onclick="window.location.href='buyer-page.html'">
+                        <img src="${product.image}" alt="${product.name}">
+                        <div class="product-info">
+                            <div class="product-name">${product.name}</div>
+                            <div class="product-price">${product.price}</div>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                searchResults.style.display = 'block';
+                searchResults.innerHTML = '<div class="search-result-item">No products found</div>';
+            }
+        });
+
+        // Check login status when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            checkLoginStatus();
+        });
+
+        // Function to check login status
+        function checkLoginStatus() {
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            const loginBtn = document.getElementById('loginBtn');
+            const userMenu = document.getElementById('userMenu');
+            const userName = document.getElementById('userName');
+
+            if (user && user.username) {
+                // User is logged in
+                loginBtn.style.display = 'none';
+                userMenu.style.display = 'block';
+                userName.textContent = user.username;
+            } else {
+                // User is not logged in
+                loginBtn.style.display = 'block';
+                userMenu.style.display = 'none';
+            }
+        }
+
+        // Login button click handler
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            window.location.href = 'login.html';
+        });
+
+        // Logout button click handler
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            // Clear user data from localStorage
+            localStorage.removeItem('currentUser');
+            // Refresh login status
+            checkLoginStatus();
+            // Optional: Redirect to home page
+            window.location.reload();
+        });
+
+        // Toggle logout menu
+        document.getElementById('userName').addEventListener('click', function() {
+            const logoutMenu = document.getElementById('logoutMenu');
+            logoutMenu.style.display = logoutMenu.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Close logout menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const userMenu = document.getElementById('userMenu');
+            const logoutMenu = document.getElementById('logoutMenu');
+            
+            if (!userMenu.contains(e.target)) {
+                logoutMenu.style.display = 'none';
+            }
+        });
+    </script>
+
+    <footer data-aos="fade-up">
+        <div class="footer-container">
+            <div class="footer-column">
+                <div class="footer-logo">BIDS IN & OUT</div>
+            </div>
+
+            <div class="footer-column">
+                <h3 class="footer-title">Bids In & Out</h3>
+                <div class="footer-links">
+                    <a href="#">Home</a>
+                    <a href="#">About</a>
+                    <a href="#">Buyer</a>
+                    <a href="#">Seller</a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h3 class="footer-title">Market</h3>
+                <div class="footer-links">
+                    <a href="#">Browse Product</a>
+                    <a href="#">Buy Product</a>
+                    <a href="#">Sell Product</a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h3 class="footer-title">Contact</h3>
+                <div class="footer-links">
+                    <a href="#">Email</a>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">Instagram</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
