@@ -4,7 +4,7 @@ A full-stack web application for online auctions where users can bid on products
 
 ## Live Demo
 
-🔗 **Live Application:** [Coming Soon - Will be hosted on Netlify]
+🔗 **Live Application:** [Deployed on Render - URL will be added after deployment]
 
 ## Features
 
@@ -90,7 +90,11 @@ BIDS-IN-OUT/
 
 4. **Start the server**
    ```bash
-   node models/server.js
+   npm start
+   ```
+   Or for development:
+   ```bash
+   npm run dev
    ```
 
 5. **Access the application**
@@ -99,6 +103,41 @@ BIDS-IN-OUT/
    ```
    http://localhost:5000
    ```
+
+## Deployment on Render
+
+This application is deployed on Render.com. To deploy your own instance:
+
+1. **Push code to GitHub** (if not already done)
+   ```bash
+   git push origin main
+   ```
+
+2. **Create Render Account**
+   - Go to [render.com](https://render.com)
+   - Sign up with GitHub
+
+3. **Create New Web Service**
+   - Click "New +" → "Web Service"
+   - Connect your GitHub repository: `MohammedMaksood/BIDS-IN-OUT`
+   - Render will auto-detect settings from `render.yaml`
+
+4. **Configure Environment Variables**
+   Add these in Render dashboard:
+   - `MONGODB_URI`: Your MongoDB Atlas connection string
+   - `JWT_SECRET`: Your secret key for JWT tokens
+   - `PORT`: 5000 (or leave default)
+
+5. **Deploy**
+   - Click "Create Web Service"
+   - Render will automatically build and deploy
+   - Your app will be live at: `https://your-app-name.onrender.com`
+
+### Important Notes for Render Deployment:
+- Free tier may sleep after inactivity (wakes up on first request)
+- First deployment takes 2-3 minutes
+- Logs available in Render dashboard
+- Auto-deploys on every push to main branch
 
 ## API Endpoints
 

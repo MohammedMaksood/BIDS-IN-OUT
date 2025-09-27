@@ -1,15 +1,17 @@
 {
-  "name": "cursor-demo",
+  "name": "bids-in-out",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "models/server.js",
   "scripts": {
+    "start": "node models/server.js",
+    "dev": "node models/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["auction", "bidding", "marketplace"],
+  "author": "Mohammed Maksood",
   "license": "ISC",
   "type": "commonjs",
-  "description": "",
+  "description": "Online auction platform with real-time bidding functionality",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
@@ -18,5 +20,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.5",
     "multer": "^1.4.5-lts.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }
