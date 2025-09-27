@@ -4,7 +4,7 @@ A full-stack web application for online auctions where users can bid on products
 
 ## Live Demo
 
-🔗 **Live Application:** [Deployed on Render - URL will be added after deployment]
+🔗 **Live Application:** [https://bids-in-out.onrender.com](https://bids-in-out.onrender.com)
 
 ## Features
 
